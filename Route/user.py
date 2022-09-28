@@ -1,12 +1,14 @@
-from fastapi import FastAPI,Depends,status,HTTPException
+from fastapi import APIRouter,Depends,status,HTTPException
 from sqlalchemy.orm import Session
 import model,schema, passcode , auth
 from database import get_db
 from fastapi.security import OAuth2PasswordRequestForm
 
-app = FastAPI()
+meth =APIRouter (
+    tags="user"
+)
 
-@app.post('/insert')
+@meth.post('/insert')
 async def insert (data:schema.create,db:Session=Depends(get_db)):
     encode = passcode.passcode(data.password)
     data.password = encode
@@ -16,24 +18,24 @@ async def insert (data:schema.create,db:Session=Depends(get_db)):
     db.refresh(new)
     return(new)
 
-@app.get('/gets')
+@meth.get('/gets')
 def gets ( db:Session=Depends(get_db)):
     gts=db.query(model.user).all()
     return(gts)
 
-@app.get('/get')
+@meth.get('/get')
 def get (db:Session=Depends(get_db) , current_user =Depends(auth.current_user)):
     gt=db.query(model.user).filter(model.user.id==current_user).first()
     return(gt)
 
-@app.put('/change')
+@meth.put('/change')
 def change (data:schema.create,db:Session=Depends(get_db) , current_user = Depends(auth.current_user)):
     ch=db.query(model.user).filter(current_user==model.user.id)
     ch.update(data.dict(),synchronize_session = False)
     db.commit()
     return ch.first()
 
-@app.delete('/remove')
+@meth.delete('/remove')
 def remove (db:Session=Depends(get_db) , current_user = Depends(auth.current_user)):
     rem=db.query(model.user).filter(current_user==model.user.id)
     if not rem.first():
@@ -43,7 +45,7 @@ def remove (db:Session=Depends(get_db) , current_user = Depends(auth.current_use
     return rem.first()
 
 
-@app.post('/login')
+@meth.post('/login')
 def login (data: OAuth2PasswordRequestForm = Depends(), db:Session= Depends(get_db)):
     user = db.query(model.user).filter(model.user.email == data.username).first()
     if not user:
@@ -57,6 +59,6 @@ def login (data: OAuth2PasswordRequestForm = Depends(), db:Session= Depends(get_
 
     return {"access_token":token , "token_type":"bearer"}
 
-@app .get("/api")
+@meth.get("/api")
 async def root():
     return{"message":"Welcome to Fast API"}
