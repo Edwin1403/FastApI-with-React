@@ -5,6 +5,8 @@ class Settings (BaseSettings):
     db_password : str
     db_host : str
     db_username : str
+    db_port : int
+    database_url: str
 
     class Cofig : 
         env_file = ".env"

@@ -1,7 +1,4 @@
-from curses import meta
 from fastapi import FastAPI
-import model
-from database import engine
 from fastapi.middleware.cors import CORSMiddleware
 from Route import post , vote , user
 
