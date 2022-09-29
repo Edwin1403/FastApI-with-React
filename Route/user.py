@@ -5,7 +5,7 @@ from database import get_db
 from fastapi.security import OAuth2PasswordRequestForm
 
 meth =APIRouter (
-    tags="user"
+    tags=["user"]
 )
 
 @meth.post('/insert')
