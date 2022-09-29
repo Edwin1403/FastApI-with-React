@@ -9,7 +9,7 @@ meth =APIRouter (
 )
 
 @meth.post('/insert')
-async def insert (data:schema.create,db:Session=Depends(get_db)):
+def insert (data:schema.create,db:Session=Depends(get_db)):
     encode = passcode.passcode(data.password)
     data.password = encode
     new=model.user(**data.dict())

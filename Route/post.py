@@ -3,7 +3,6 @@ from database import get_db
 from sqlalchemy.orm import Session
 from auth import current_user
 import model , schema
-from typing import List
 
 route = APIRouter(
     tags=['Post']
