@@ -1,9 +1,10 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+from config import settings
 
 try:
-    dbURL="postgresql://Cyril:Edwin123@localhost/formapi" 
+    dbURL=f"postgresql://{settings.db_username}:{settings.db_password}@{settings.db_host}/{settings.db_name}" 
     engine=create_engine(dbURL)
     local=sessionmaker(autoflush=False,autocommit=False,bind=engine)
     print("success")
