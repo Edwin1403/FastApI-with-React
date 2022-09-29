@@ -5,7 +5,7 @@ from auth import current_user
 import model , schema
 
 route = APIRouter(
-    tags=['Post']
+    tags=['post']
 )
 
 
