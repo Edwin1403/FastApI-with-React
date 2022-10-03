@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from config import settings
 
 try:
-    dbURL=f"postgresql://{settings.database_url}" 
+    dbURL=f"postgresql://{settings.db_url}" 
     engine=create_engine(dbURL)
     local=sessionmaker(autoflush=False,autocommit=False,bind=engine)
     print("success")
