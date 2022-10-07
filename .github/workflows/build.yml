@@ -2,6 +2,25 @@ name: Build and deploy
 on: [push , pull_request]
 jobs:
   build:
+    environment:
+      name: secrets
+    env: 
+      DB_URL: ${{secrets.DB_URL}}
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres
+        # Provide the password for postgres
+        env:
+          POSTGRES_PASSWORD: ${{secrets.DB_PASSWORD}}
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     runs-on: ubuntu-latest
     steps:
       - name: pulling from git
@@ -13,5 +32,5 @@ jobs:
       - name: install packages
         run: pip install -r requirements.txt
       - name: testing
-        run: pytest -s -v       
+        run: pytest -s -v
 
