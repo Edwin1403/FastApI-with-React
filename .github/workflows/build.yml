@@ -38,6 +38,8 @@ jobs:
     environment:
       name: deployment
     steps:
+      - name: pull from git repo.
+        uses: actions/checkout@v2
       - name: Deploy on heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
