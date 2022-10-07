@@ -1,8 +1,8 @@
 from fastapi import APIRouter , Depends 
-from database import get_db
+from ..database import get_db
 from sqlalchemy.orm import Session
-from auth import current_user
-import model , schema
+from ..auth import current_user
+from ..import model , schema
 
 route = APIRouter(
     tags=['post']

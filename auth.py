@@ -28,7 +28,6 @@ def verify_token(token , credential_exception):
 
 
 def current_user(token :str =Depends(oAuth)):
-    print(token)
     credential_exception = HTTPException(status_code=status.HTTP_403_FORBIDDEN , detail="Unauthorized user")
     return verify_token(token , credential_exception)     
 

@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from Route import post , vote , user
+from .Route import post,vote , user
 
 # model.base.metadata.create_all(bind=engine)
 
@@ -15,6 +15,7 @@ origins = [
    
     "http://localhost:3000",
     "http://192.168.97.232:3000 ",
+    "http://localhost:4200",
 ]
 
 app.add_middleware(

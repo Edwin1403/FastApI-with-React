@@ -1,0 +1,13 @@
+name: Build and deploy
+on: [push , pull-request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: pulling from git
+        uses: actions/checkout@v2
+      - name: install python
+        uses: actions/setup python@v2
+        with:
+          python-version: "3.10"  
+
