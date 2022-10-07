@@ -22,12 +22,12 @@ jobs:
 
       - name: setup postgresql DB
         uses: ikalnytskyi/action-setup-postgres@v3
-          with:
-            username: postgres
-            password: postgres
-            database: postgres_test
-            port: 5432
-          id: postgres
+        with:
+          username: postgres
+          password: postgres
+          database: postgres_test
+          port: 5432
+        id: postgres
 
       - name: testing
         run: pytest -s -v
