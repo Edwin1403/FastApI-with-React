@@ -1,6 +1,3 @@
-from fastapi.testclient import TestClient
-from ..main import app
-
 def test_start(Client):
     res = Client.get('/api')
     print(res.json())
