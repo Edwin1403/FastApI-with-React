@@ -3,10 +3,10 @@ from sqlalchemy import create_engine, false
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from fastapi.testclient import TestClient
-from ..database import base,get_db
-from ..config import settings
-from ..main import app
-from ..auth import create_token
+from database import base,get_db
+from config import settings
+from main import app
+from auth import create_token
 
 url = f'postgresql://{settings.db_url}_test' #\Cyril:Edwin123@localhost:5432/formapi_test
 print(url)
