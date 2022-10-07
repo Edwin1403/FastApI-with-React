@@ -32,3 +32,15 @@ jobs:
       - name: testing
         run: pytest -s -v
 
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
+    environment:
+      name: deployment
+    steps:
+      - name: Deploy on heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.KEY}}
+          heroku_app_name: ${{secrets.APP}} #Must be unique in Heroku
+          heroku_email: ${{secrets.EMAIL}}  
